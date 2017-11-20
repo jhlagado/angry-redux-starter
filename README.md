@@ -1,3 +1,3 @@
-# Angular 1.6 component architecture app
+# angry-starter
+# Angular 1.6 component architecture starter app
 
-test
