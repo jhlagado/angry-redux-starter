@@ -85,8 +85,14 @@ describe('Contact', () => {
       $rootScope = $injector.get('$rootScope');
       $q = $injector.get('$q');
 
-      controller = $componentController('contactEdit',
-        { $scope: {}, $state, ContactService, cfpLoadingBar },
+      controller = $componentController(
+        'contactEdit',
+        {
+          $scope: {},
+          $state,
+          ContactService,
+          cfpLoadingBar,
+        },
         { contact: mockContact }
       );
     }));

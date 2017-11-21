@@ -71,9 +71,17 @@ describe('Contact', () => {
       $componentController = $injector.get('$componentController');
       $filter = $injector.get('$filter');
       $state = $injector.get('$state');
-      controller = $componentController('contacts',
-        { $scope: {}, $filter, $state },
-        { filter: mockFilter, contacts: mockContacts }
+      controller = $componentController(
+        'contacts',
+        {
+          $scope: {},
+          $filter,
+          $state,
+        },
+        {
+          filter: mockFilter,
+          contacts: mockContacts,
+        }
       );
     }));
 

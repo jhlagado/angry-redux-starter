@@ -18,9 +18,13 @@ describe('Contact', () => {
 
     beforeEach(inject(($injector) => {
       $componentController = $injector.get('$componentController');
-      controller = $componentController('contactTag',
+      controller = $componentController(
+        'contactTag',
         { $scope: {} },
-        { tag: mockTag, onChange: mockChange }
+        {
+          tag: mockTag,
+          onChange: mockChange,
+        }
       );
     }));
 

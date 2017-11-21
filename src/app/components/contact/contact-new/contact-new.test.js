@@ -69,8 +69,13 @@ describe('Contact', () => {
       $rootScope = $injector.get('$rootScope');
       $q = $injector.get('$q');
 
-      controller = $componentController('contactNew',
-        { $scope: {}, $state, ContactService }
+      controller = $componentController(
+        'contactNew',
+        {
+          $scope: {},
+          $state,
+          ContactService,
+        }
       );
     }));
 

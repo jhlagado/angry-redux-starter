@@ -20,9 +20,15 @@ describe('Contact', () => {
 
     beforeEach(inject(($injector) => {
       $componentController = $injector.get('$componentController');
-      controller = $componentController('contactDetail',
+      controller = $componentController(
+        'contactDetail',
         { $scope: {} },
-        { contact: mockContact, onSave: mockSave, onUpdate: mockUpdate, onDelete: mockDelete }
+        {
+          contact: mockContact,
+          onSave: mockSave,
+          onUpdate: mockUpdate,
+          onDelete: mockDelete,
+        }
       );
     }));
 
@@ -34,9 +40,15 @@ describe('Contact', () => {
     });
 
     it('should initialize isNewContact if no $id is present', () => {
-      controller = $componentController('contactDetail',
+      controller = $componentController(
+        'contactDetail',
         { $scope: {} },
-        { contact: {}, onSave: mockSave, onUpdate: mockUpdate, onDelete: mockDelete }
+        {
+          contact: {},
+          onSave: mockSave,
+          onUpdate: mockUpdate,
+          onDelete: mockDelete,
+        }
       );
       controller.$onInit();
 

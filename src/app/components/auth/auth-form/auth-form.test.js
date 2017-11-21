@@ -19,9 +19,15 @@ describe('Auth', () => {
     beforeEach(inject(($injector) => {
       $componentController = $injector.get('$componentController');
 
-      controller = $componentController('authForm',
+      controller = $componentController(
+        'authForm',
         { $scope: {} },
-        { user: mockUser, button: '', message: '', onSubmit: mockSubmit }
+        {
+          user: mockUser,
+          button: '',
+          message: '',
+          onSubmit: mockSubmit,
+        }
       );
     }));
 

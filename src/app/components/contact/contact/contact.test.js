@@ -18,14 +18,16 @@ describe('Contact', () => {
 
     beforeEach(inject(($injector) => {
       $componentController = $injector.get('$componentController');
-      controller = $componentController('contact',
+      controller = $componentController(
+        'contact',
         {
           $scope: {},
         },
         {
           contact: mockContact,
           onSelect: mockSelect,
-        });
+        }
+      );
     }));
 
     it('should bind to the correct contact', () => {
