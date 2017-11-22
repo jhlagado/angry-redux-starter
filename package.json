@@ -15,14 +15,16 @@
     "angular": "1.6.5",
     "angular-loading-bar": "0.9.0",
     "angular-messages": "1.5.8",
-    "angularfire": "2.0.2",
-    "firebase": "4.6.2"
+    "angularfire": "^2.0.2",
+    "firebase": "^4.6.2",
+    "ng-redux": "3.5.2",
+    "redux": "3.7.2"
   },
   "devDependencies": {
     "angular-mocks": "1.6.5",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
-    "babel-eslint": "8.0.2",
+    "babel-eslint": "^8.0.2",
     "babel-loader": "7.1.2",
     "babel-plugin-angularjs-annotate": "0.8.0",
     "babel-polyfill": "6.9.1",
@@ -68,12 +70,10 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
-
     "react": "^15.6.1",
     "react-dev-utils": "^3.0.2",
     "react-dom": "^15.6.1",
     "react-error-overlay": "^1.0.9",
-
     "sass-loader": "6.0.6",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
