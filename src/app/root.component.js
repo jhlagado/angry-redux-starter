@@ -1,19 +1,20 @@
+// import { stateGo } from 'redux-ui-router';
+
 import templateUrl from './root.html';
 
 export const rootComponent = {
   templateUrl,
   controller: class ContactsComponent {
-    constructor($ngRedux, $scope) {
+    constructor($ngRedux) {
       'ngInject';
 
-      const unsubscribe = $ngRedux.connect(this.mapStateToThis)(this);
-      $scope.$on('$destroy', unsubscribe);
-    }
+      this.$onDestroy = $ngRedux.connect(state => ({
+        base: state.base,
+        router: state.router,
+      }))(this);
 
-    mapStateToThis(state) {
-      return {
-        x: state.x,
-      };
+      // this.dispatch(stateGo('app'));
+      this.dispatch({ type: 'hello' });
     }
   },
 };

@@ -7,6 +7,7 @@ export const middlewares = angular
 
     return store => next => (action) => {
       $log.log('middleware', store, next, action);
+      next(action);
     };
   })
   .name;
