@@ -14,8 +14,6 @@ import './root.scss';
 
 import { middlewares } from './middlewares';
 
-// console.info(ngUiRouter);
-
 registerServiceWorker();
 
 export const root = angular
