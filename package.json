@@ -18,7 +18,8 @@
     "angularfire": "^2.0.2",
     "firebase": "^4.6.2",
     "ng-redux": "3.5.2",
-    "redux": "3.7.2"
+    "redux": "3.7.2",
+    "redux-ui-router": "^0.7.2"
   },
   "devDependencies": {
     "angular-mocks": "1.6.5",
