@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import React, { Component } from 'react';
+// import ReactDOM from 'react-dom';
 
 import templateUrl from './contacts.html';
 
@@ -13,10 +13,10 @@ export const contactsComponent = {
     constructor($state, $filter) {
       'ngInject';
 
-      ReactDOM.render(
-        <ReactComp name="John"/>,
-        document.getElementById('reactcomp')
-      );
+      // ReactDOM.render(
+      //   <ReactComp name="John"/>,
+      //   document.getElementById('reactcomp')
+      // );
 
       this.$state = $state;
       this.$filter = $filter;
@@ -32,10 +32,3 @@ export const contactsComponent = {
   },
 };
 
-class ReactComp extends Component {
-  render() {
-    return (
-      <div>Hello {this.props.name}!!!</div>
-    );
-  }
-}

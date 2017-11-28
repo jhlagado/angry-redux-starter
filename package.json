@@ -19,6 +19,7 @@
     "firebase": "3.9.0",
     "ng-redux": "3.5.2",
     "react-redux": "5.0.6",
+    "react2angular": "^3.0.2",
     "redux": "3.7.2",
     "redux-devtools": "3.4.1",
     "redux-ui-router": "0.7.2"

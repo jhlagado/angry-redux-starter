@@ -9,7 +9,7 @@
         </a>
       </div>
       <div class="header__logout">
-        {{ ::$ctrl.user.email }}
+        <hello-component name=":: $ctrl.user.email"></hello-component>
         <a href="" ng-click="$ctrl.onLogout();">
           <span class="header__button">
             <i class="material-icons">power_settings_new</i>

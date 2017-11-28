@@ -6,7 +6,7 @@ export const middlewares = angular
     'ngInject';
 
     return store => next => (action) => {
-      $log.log('middleware', store, next, action);
+      // $log.log('middleware', store, next, action);
       next(action);
     };
   })
