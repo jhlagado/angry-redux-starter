@@ -1,13 +1,21 @@
 import templateUrl from './contact-new.html';
+import { stateGo } from 'redux-ui-router';
 
 export const contactNewComponent = {
   templateUrl,
   controller: class ContactNewComponent {
-    constructor(ContactService, $state) {
+    constructor($ngRedux, ContactService) {
       'ngInject';
 
       this.contactService = ContactService;
-      this.$state = $state;
+
+      this.$onDestroy = $ngRedux.connect(state => ({
+        // base: state.base,
+        router: state.router,
+      }), {
+        stateGo,
+      })(this);
+
     }
     $onInit() {
       this.contact = {
@@ -28,7 +36,7 @@ export const contactNewComponent = {
       return this.contactService
         .createNewContact(event.contact)
         .then((contact) => {
-          this.$state.go('contact', {
+          this.stateGo('contact', {
             id: contact.key,
           });
         });

@@ -1,4 +1,5 @@
 import templateUrl from './contact-edit.html';
+import { stateGo } from 'redux-ui-router';
 
 export const contactEditComponent = {
   bindings: {
@@ -6,13 +7,19 @@ export const contactEditComponent = {
   },
   templateUrl,
   controller: class ContactEditComponent {
-    constructor(ContactService, cfpLoadingBar, $window, $state) {
+    constructor($ngRedux, ContactService, cfpLoadingBar, $window) {
       'ngInject';
 
       this.contactService = ContactService;
       this.cfpLoadingBar = cfpLoadingBar;
       this.$window = $window;
-      this.$state = $state;
+
+      this.$onDestroy = $ngRedux.connect(state => ({
+        // base: state.base,
+        router: state.router,
+      }), {
+        stateGo,
+      })(this);
     }
     deleteContact(event) {
       const message = `Delete ${event.contact.name} from contacts?`;
@@ -20,7 +27,7 @@ export const contactEditComponent = {
         return this.contactService
           .deleteContact(event.contact)
           .then(() => {
-            this.$state.go('contacts');
+            this.stateGo('contacts');
           });
       }
       return undefined;

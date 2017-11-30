@@ -12,7 +12,8 @@ import { common } from './common/common.module';
 import { components } from './components/components.module';
 import './root.scss';
 
-import { middlewares } from './middlewares';
+import { middleware } from './middleware/middleware.module';
+import { authReducer } from './reducers/auth.reducer';
 
 registerServiceWorker();
 
@@ -23,7 +24,7 @@ export const root = angular
     ngReduxUiRouter,
     common,
     components,
-    middlewares,
+    middleware,
   ])
   .component('root', rootComponent)
   .config(($locationProvider) => {
@@ -34,19 +35,16 @@ export const root = angular
   .config(($ngReduxProvider) => {
     'ngInject';
 
-    const baseReducer = (state = { x: 123 }) =>
-      state;
-
     const rootReducer = combineReducers({
-      base: baseReducer,
+      auth: authReducer,
       router,
     });
 
     $ngReduxProvider.createStoreWith(
       rootReducer,
       [
-        'middleware1',
-        // 'ngUiRouterMiddleware',
+        'authMiddleware',
+        'ngUiRouterMiddleware',
       ],
       /* eslint-disable no-underscore-dangle */
       [window.__REDUX_DEVTOOLS_EXTENSION__()]

@@ -1,13 +1,21 @@
 import templateUrl from './register.html';
+import { stateGo } from 'redux-ui-router';
 
 export const registerComponent = {
   templateUrl,
   controller: class RegisterComponent {
-    constructor(AuthService, $state) {
+    constructor($ngRedux, AuthService) {
       'ngInject';
 
       this.authService = AuthService;
-      this.$state = $state;
+
+      this.$onDestroy = $ngRedux.connect(state => ({
+        // base: state.base,
+        router: state.router,
+      }), {
+        stateGo,
+      })(this);
+
     }
     $onInit() {
       this.error = null;
@@ -20,7 +28,7 @@ export const registerComponent = {
       return this.authService
         .register(event.user)
         .then(() => {
-          this.$state.go('app');
+          this.stateGo('app');
         }, (reason) => {
           this.error = reason.message;
         });

@@ -1,7 +1,5 @@
-// import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
-
 import templateUrl from './contacts.html';
+import { stateGo } from 'redux-ui-router';
 
 export const contactsComponent = {
   bindings: {
@@ -10,22 +8,24 @@ export const contactsComponent = {
   },
   templateUrl,
   controller: class ContactsComponent {
-    constructor($state, $filter) {
+    constructor($ngRedux, $filter) {
       'ngInject';
 
-      // ReactDOM.render(
-      //   <ReactComp name="John"/>,
-      //   document.getElementById('reactcomp')
-      // );
-
-      this.$state = $state;
       this.$filter = $filter;
+
+      this.$onDestroy = $ngRedux.connect(state => ({
+        // base: state.base,
+        router: state.router,
+      }), {
+        stateGo,
+      })(this);
+
     }
     $onInit() {
       this.filteredContacts = this.$filter('contactsFilter')(this.contacts, this.filter);
     }
     goToContact(event) {
-      this.$state.go('contact', {
+      this.stateGo('contact', {
         id: event.contactId,
       });
     }

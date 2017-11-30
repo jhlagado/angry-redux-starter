@@ -10,7 +10,7 @@ export const rootComponent = {
         base: state.base,
         router: state.router,
       }))(this);
-      this.dispatch({ type: 'hello' });
+      this.dispatch({ type: 'INIT' });
     }
   },
 };

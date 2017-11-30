@@ -1,19 +1,25 @@
 import templateUrl from './app.html';
-
+import { stateGo } from 'redux-ui-router';
 export const appComponent = {
   templateUrl,
   controller: class AppComponent {
-    constructor(AuthService, $state) {
+    constructor($ngRedux, AuthService) {
       'ngInject';
 
       this.authService = AuthService;
-      this.$state = $state;
       this.user = AuthService.getUser();
+
+      this.$onDestroy = $ngRedux.connect(state => ({
+        // base: state.base,
+        router: state.router,
+      }), {
+        stateGo,
+      })(this);
     }
     logout() {
       return this.authService
         .logout()
-        .then(() => this.$state.go('auth.login'));
+        .then(() => this.stateGo('auth.login'));
     }
   },
 };
