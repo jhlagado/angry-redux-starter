@@ -7,6 +7,7 @@ export const contactNewComponent = {
     constructor($ngRedux, ContactService) {
       'ngInject';
 
+      this.dispatch = this.$ngRedux.dispatch;
       this.contactService = ContactService;
 
       this.$onDestroy = $ngRedux.connect(state => ({
@@ -33,6 +34,8 @@ export const contactNewComponent = {
       };
     }
     createNewContact(event) {
+      this.dispatch({type:'CONTACT_CREATE_NEW', payload: {contact: event.contact}});
+
       return this.contactService
         .createNewContact(event.contact)
         .then((contact) => {
