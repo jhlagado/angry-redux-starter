@@ -1,20 +1,40 @@
-import firebase from 'firebase';
+// import firebase from 'firebase';
 
 export const authMiddleware = ($log, $firebaseAuth) => {
     'ngInject';
 
     return store => next => (action) => {
-      $log.info(action.type);
-      if (action.type === 'INIT') {
-        $log.info('Init action');
-        store.dispatch({
-          type: 'INIT_AUTH',
-          payload: {
-            auth: $firebaseAuth(firebase.auth()),
-            authData: null,
-          },
-        })
+
+      const middlewares = {
+
+        // INIT() {
+        //   store.dispatch({
+        //     type: 'INIT_AUTH',
+        //     payload: {
+        //       auth: $firebaseAuth(firebase.auth()),
+        //       authData: null,
+        //     },
+        //   })
+        // },
+
+        // AUTH_ON_LOGIN() {
+        //   action.payroll.auth.$requireSignIn().then(() => {
+
+        //   });
+        //   store.dispatch({
+        //     type: 'INIT_AUTH',
+        //     payload: {
+
+        //       authData: null,
+        //     },
+        //   })
+        // },
       }
-      next(action);
+
+      if (action.type in middlewares) {
+        if (middlewares[action.type]() == null) next(action);
+      }
+      else
+        next(action);
     };
 }

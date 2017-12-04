@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { bindActionCreators } from 'redux';
 
 export class AuthService {
 
@@ -7,61 +6,47 @@ export class AuthService {
     'ngInject';
 
     this.auth = $firebaseAuth(firebase.auth());
-    this.authData = null;
     this.dispatch = $ngRedux.dispatch;
 
-    const actionCreators = {
-      login: (user) => ({
-        type: 'AUTH_LOGIN',
-        payload: {
-          user,
-        },
-      }),
-    };
+    $ngRedux.subscribe(() => {
+      const state = $ngRedux.getState();
+      this.authData = state.auth.authData;
+    });
 
-    this.actions = bindActionCreators(actionCreators, $ngRedux.dispatch);
+    this.storeAuthData(null);
   }
 
-  onLogin(user) {
-    this.dispatch({type:'AUTH_ON_LOGIN', payload: {user}});
-    this.authData = user;
-    return this.auth.$requireSignIn();
-  };
-
-  storeAuthData(data) {
-    this.dispatch({type:'AUTH_STORE_AUTH_DATA', payload: {authData: data}});
-    this.authData = data;
-    return this.authData;
-  };
-
-  onLogout() {
-    this.dispatch({type:'AUTH_STORE_AUTH_DATA', payload: {authData: null}});
-    this.authData = null;
+  storeAuthData(authData) {
+    this.dispatch({type:'AUTH_STORE_DATA', payload: {authData}});
   };
 
   login(user) {
-    this.dispatch({type:'AUTH_LOGIN', payload: user});
+    this.dispatch({type:'AUTH_LOGGING_IN', payload: user});
     return this.auth
       .$signInWithEmailAndPassword(user.email, user.password)
       .then((data) => this.storeAuthData(data));
   }
   register(user) {
-    this.dispatch({type:'AUTH_REGISTER', payload: user});
+    this.dispatch({type:'AUTH_REGISTERING', payload: user});
     return this.auth
       .$createUserWithEmailAndPassword(user.email, user.password)
       .then((data) => this.storeAuthData(data));
   }
   logout() {
-    this.dispatch({type:'AUTH_LOGOUT'});
+    this.dispatch({type:'AUTH_LOGGING_OUT'});
     return this.auth
       .$signOut()
-      .then(() => this.onLogout());
+      .then(() => this.storeAuthData(null));
   }
   requireAuthentication() {
     return this.auth
       .$waitForSignIn()
-      .then((user) => this.onLogin(user));
+      .then((user) => {
+        this.storeAuthData(user);
+        return this.auth.$requireSignIn();
+      });
   }
+
   isAuthenticated() {
     return !!this.authData;
   }

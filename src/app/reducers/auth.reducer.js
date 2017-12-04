@@ -1,11 +1,15 @@
 export const authReducer = (state = {}, action) => {
-    if (action.type === 'INIT_AUTH') {
-        const { auth, authData} = action.payload;
-        return {
-            ...state,
-            auth,
-            authData,
-        }
+
+    const reducers = {
+
+        AUTH_STORE_DATA() {
+            const { authData} = action.payload;
+            return {
+                ...state,
+                authData,
+            }
+        },
     }
-    return state;
+
+    return action.type in reducers ? reducers[action.type]() : state;
 }
